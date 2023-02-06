@@ -16,12 +16,8 @@ app.get('/', (req, res) => {
 
 io.on('connection',(socket)=>{
     
-    //io.emit('conectado','Estou conectado');
-
-    socket.broadcast.emit('novo usuario','Novo usuario conectado!');
-
-    socket.on("disconnect",()=>{
-        console.log('Desconectado')
+    socket.on('chat message',(obj)=>{
+        console.log(obj);
     })
 
 })

@@ -47,19 +47,24 @@
     <script>
 
         var socket = io();
+        var nome = prompt('Qual seu nome?');
 
-        socket.on('conectado', function(msg) {
+        alert('Bem vindo ao Shiba Chat ' +nome);
 
-            console.log(msg);
+        var messages = document.getElementById('messages');
+        var form = document.getElementById('form');
+        var input = document.getElementById('input');
 
-        });
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            if(input.value){
+                socket.emit('chat message',{msg:input.value, nome:nome});
+                input.value = '';
+                alert('Mensagem foi enviada com sucesso!')
 
-        socket.on('novo usuario', function(msg) {
+            }
 
-            console.log(msg);
-
-        });
-
+        })
     </script>
 
   </body>
