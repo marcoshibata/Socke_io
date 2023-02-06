@@ -15,26 +15,14 @@ app.get('/', (req, res) => {
 
 
 io.on('connection',(socket)=>{
-
     
+    //io.emit('conectado','Estou conectado');
 
+    socket.broadcast.emit('novo usuario','Novo usuario conectado!');
 
-
-    //io.emit('conectado','Estou conectado!');
-
-
-
-    socket.broadcast.emit('novo usuario','Um novo usuário se conectou!');
-
-
-
-    socket.on('disconnect',()=>{
-
-        console.log('Desconectado.');
-
+    socket.on("disconnect",()=>{
+        console.log('Desconectado')
     })
-
-
 
 })
 
