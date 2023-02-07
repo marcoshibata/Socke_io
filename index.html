@@ -26,7 +26,9 @@
 
       #messages > li { padding: 0.5rem 1rem; }
 
-      #messages > li:nth-child(odd) { background: #efefef; }
+      #messages > li{
+        background-color: white;
+      }
 
     </style>
 
@@ -60,11 +62,29 @@
             if(input.value){
                 socket.emit('chat message',{msg:input.value, nome:nome});
                 input.value = '';
-                alert('Mensagem foi enviada com sucesso!')
+
 
             }
-
         })
+
+        socket.on('chat messege',function(obj){
+          if(obj.nome == nome){
+            //coloca a mensagem de uma cor
+            var item = document.createElement('li');
+            item.style.backgroundColor ='gray';
+            item.textContent = obj.nome+' disse: '+ obj.msg;
+            messages.appendChild(item);
+            window.screenTop(0,document.body.scrollHeight);
+          }else{
+            // coloca a mensagem em outra cor
+            var item = document.createElement('li');
+            
+            item.textContent = obj.nome+' disse: '+obj.msg;
+            messages.appendChild(item);
+            window.screenTop(0,document.body.scrollHeight);
+          }
+        })
+
     </script>
 
   </body>

@@ -4,7 +4,7 @@ const http = require('http').createServer(app);
 
 const io = require('socket.io')(http);
 
-
+var ususarios = [];
 
 app.get('/', (req, res) => {
 
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 io.on('connection',(socket)=>{
     
     socket.on('chat message',(obj)=>{
-        console.log(obj);
+        io.emit('chat messege',obj);
     })
 
 })
